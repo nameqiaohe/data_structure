@@ -1,0 +1,26 @@
+1、使用类模版，是这个 stack不受数据类型的限制
+	Step 1 : 需要使用关键字 template,
+		还需要关键字 typename
+			如：template <tyename T>
+		在 my_stack.hpp中的 类前使用 template <tyename T>
+	Step 2 : 用 T 来替换所有的通用数据类型
+		在 my_stack.hpp中 替换对应的数据类型 为 T 
+
+	Step 3 : 在 my_stack.cpp 中的每一个成员函数前添加 template <tyename T>
+
+	Step 4 : 在 my_stack.cpp 中的每一个成员函数的 类名后加上 <T>
+		如：
+			MyStack<T>::MyStack(){}
+
+	Step 5 : 将my_stack.cpp 中的构造函数的 new语句改一下
+		如：m_buffer = new T[size];
+
+	Step 6 : 将my_stack.cpp 中的成员函数中的参数中涉及通用数据类型的也要改为T
+
+	Step 7 : 部分编译器可能不支持 xx.h 和 xx.cpp 的分开编译，需要将其合并
+
+	Step 8 : 对于复杂的通用数据类型，可能还需要重载 << 符号
+
+	Step 9 : 在用用的时候，也要用到 <Coordinate>
+		如：在 demo.cpp中使用 MyStack时，需要将其变成一个 模版类：
+			MyStack<Coordinate> *pStack = new MyStack<Coordinate>(5);
